@@ -1,0 +1,16 @@
+[Unit]
+Description=Enshrouded Server
+After=syslog.target network.target
+
+[Service]
+ENVIRONMENT=WINEARCH=win64
+ExecStartPre=/usr/games/steamcmd +@sSteamCmdForcePlatformType windows +force_install_dir APP_DIR/enshrouded +login anonymous +app_update 2278520 +quit
+ExecStart=wine64 APP_DIR/enshrouded/enshrouded_server.exe
+User=APP_USER
+Group=APP_GROUP
+Type=simple
+Restart=on-failure
+RestartSec=50s
+
+[Install]
+WantedBy=multi-user.target
